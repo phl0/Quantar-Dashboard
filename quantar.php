@@ -35,8 +35,11 @@ if (!$fp) {
     // Read echo and discard
     $buffer = fgets($fp, 5); 
 
-    // Read command prompt (i.e. "]-O ")
+    // Read command prompt (i.e. "]-O ") and check if it came back
     $buffer = fgets($fp, 6); 
+    if ($buffer != "]-O ") {
+        printf ("Error. Prompt \"]-O \" not found\n");
+    }
 
     // Send command "dorap"
     $data = "dorap\r";
@@ -44,12 +47,18 @@ if (!$fp) {
 
     // Read and discard echo of "dorap" command
     $buffer = fgets($fp, 7);
+    if ($buffer != "dorap\r") {
+        printf ("Error. Command \"dorap\" not accepted\n");
+    }
 
     // Read and discard line feed
     $buffer = fgets($fp, 5); 
 
     // Read and discard prompt "RAP: "
     $buffer = fgets($fp, 6);
+    if ($buffer != "RAP: ") {
+        printf ("Error. RAP prompt not found\n");
+    }
 
     // Send command "MTR TX_PA_P1"
     $data = "MTR TX_PA_P1\r";
@@ -57,6 +66,9 @@ if (!$fp) {
 
     // Read and discard echo of "MTR TX_PA_P1" command
     $buffer = fgets($fp, 13);
+    if ($buffer != "MTR TX_PA_P1") {
+        printf ("Error. MTR TX_PA_P1 not found\n");
+    }
 
     // Read and discard line feed
     $buffer = fgets($fp, 5); 
