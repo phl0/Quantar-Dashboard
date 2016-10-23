@@ -5,7 +5,7 @@ $fp = fsockopen($host, $port, $errno, $errstr, 30);
 if (!$fp) {
     echo "$errstr ($errno)<br />\n";
 } else {
-    stream_set_timeout($fp, 1);
+    stream_set_timeout($fp, 2);
     $buffer = ""; 
 
     // Get and ignore the telnet options for now
@@ -75,9 +75,12 @@ if (!$fp) {
 
     // Read output of MTR TX_PA_P1 command
     $i = 1;
-    for ($i=1; $i < 60; $i++) {
-       $buffer = fgets($fp, 1024);
-       printf("$buffer <br>");
+    for ($i=1; $i < 50; $i++) {
+        $buffer = fgets($fp, 1024);
+        $buffer = trim(preg_replace('/RAP: /', '', $buffer));
+        if ($buffer != '') {
+            printf("$buffer <br>\n");
+        }
     }
 
     // Send command "exit"
