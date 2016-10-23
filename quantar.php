@@ -1,5 +1,7 @@
 <?php
-$fp = fsockopen("172.31.5.13", 2065, $errno, $errstr, 30);
+include ("config.inc.php");
+
+$fp = fsockopen($host, $port, $errno, $errstr, 30);
 if (!$fp) {
     echo "$errstr ($errno)<br />\n";
 } else {
