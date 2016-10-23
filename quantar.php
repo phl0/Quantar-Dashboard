@@ -23,7 +23,8 @@ if (!$fp) {
 
     // Another answer grabbed from a console telnet session
     // FFFA1800787465726D2D323536636F6C6F72FFF0
-    $data = hex2bin("FFFA1800787465726D2D323536636F6C6F72FFF0");
+    // contains the clients name, modified to display "Quantar-Dashboard".
+    $data = hex2bin("FFFA18005175616E7461722D44617368626F617264FFF0");
     fwrite($fp, $data); 
 
     // Now the console seems to be open and ready to receive commands
