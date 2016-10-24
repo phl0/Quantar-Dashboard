@@ -74,14 +74,19 @@ if (!$fp) {
     $buffer = fgets($fp, 5); 
 
     // Read output of MTR TX_PA_P1 command
+    $values = array();
+
     $i = 1;
     for ($i=1; $i < 50; $i++) {
         $buffer = fgets($fp, 1024);
         $buffer = trim(preg_replace('/RAP: /', '', $buffer));
         if ($buffer != '') {
-            printf("$buffer <br>\n");
+            $temp = explode(" = ", $buffer);
+            $values["$temp[0]"] = $temp[1];
         }
     }
+
+    // Now we should have all the values in an indexed array
 
     // Send command "exit"
     $data = "exit\r";
