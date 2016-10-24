@@ -88,6 +88,12 @@ if (!$fp) {
 
     // Now we should have all the values in an indexed array
 
+    print "<table border=\"0\" cellspacing=\"2\">\n";
+    foreach ($values as $key => $value) {
+        print "<tr><td align=\"left\">{$key}</td><td align=\"left\">{$value}</td></tr>\n";
+    }
+    print "</table>\n";
+
     // Send command "exit"
     $data = "exit\r";
     fwrite($fp, $data);
